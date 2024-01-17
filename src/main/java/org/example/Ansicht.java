@@ -3,16 +3,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.awt.event.ActionListener;
 public class Ansicht extends JFrame {
-    private ImageIcon bild;
+    private JLabel imageLabel;
     private JTextField eingabe;
     private JLabel letzterVersuch;
     private JLabel statistik;
     public static final int LV_NONE = 1;
     public static final int LV_RICHTIG = 2;
     public static final int LV_FALSCH = 3;
-    public Ansicht(){
-        super("Rechtschreibtrainer");
+    public Ansicht(ActionListener ac){
+        super("Trainer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1500, 900);
 
@@ -24,12 +25,14 @@ public class Ansicht extends JFrame {
         JPanel midPanel = new JPanel(new BorderLayout());
 
         //Bild
+        ImageIcon bild;
+
         try {
             bild = new ImageIcon(new URL("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-        JLabel imageLabel = new JLabel(bild);
+        imageLabel = new JLabel(bild);
         panel.add(imageLabel, BorderLayout.NORTH);
         midPanel.add(imageLabel, BorderLayout.CENTER);
 
@@ -39,6 +42,8 @@ public class Ansicht extends JFrame {
 
         //Senden Button
         JButton submit = new JButton("Abschicken");
+        submit.setActionCommand("Überprüfen");
+        submit.addActionListener(ac);
         panel.add(submit, BorderLayout.SOUTH);
 
         //letzer Versuch
@@ -58,15 +63,10 @@ public class Ansicht extends JFrame {
     public void setBild(String url){
 
         try {
-            bild = new ImageIcon(new URL(url));
+            imageLabel.setIcon(new ImageIcon(new URL(url)));
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void setStatistik(int gesamt, int richtig, int falsch){
-
-        statistik.setText("<html>Gesamt: "+gesamt+"<br/>Richtig: "+richtig+"<br/>Falsch: "+falsch+"</html>");
     }
     public void setLV(int status){
 
@@ -79,5 +79,17 @@ public class Ansicht extends JFrame {
                 break;
             default: letzterVersuch.setText("");
         }
+    }
+    public void setStatistik(int gesamt, int richtig, int falsch){
+
+        statistik.setText("<html>Gesamt: "+gesamt+"<br/>Richtig: "+richtig+"<br/>Falsch: "+falsch+"</html>");
+    }
+
+    public String getEingabe(){
+        return eingabe.getText();
+    }
+
+    public void resetEingabe() {
+        eingabe.setText("");
     }
 }

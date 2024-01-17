@@ -29,6 +29,7 @@ public class Trainer {
                 currentWort = null;
                 insgesamt++;
                 richtig++;
+                wortAuswaehlen();
                 return true;
             }
             insgesamt++;
