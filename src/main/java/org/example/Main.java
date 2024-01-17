@@ -21,6 +21,10 @@ public class Main {
         System.out.println("Gesamt: "+rt1.getStatistikInsgesamt()+" Richtig: "+rt1.getStatistikRichtig() + " Falsch: "+rt1.getStatistikFalsch());
 
         //Ansicht ansicht = new Ansicht();
-
+        Speichern speichern = new JSONSpeichern();
+        speichern.speichern("speicherung.json", rt1);
+        Trainer rt2 = speichern.laden("speicherung.json");
+        System.out.println("Gesamt: "+rt2.getStatistikInsgesamt()+" Richtig: "+rt2.getStatistikRichtig() + " Falsch: "+rt2.getStatistikFalsch());
+        System.out.println(rt2.getCurrentWort().getURL());
     }
 }
