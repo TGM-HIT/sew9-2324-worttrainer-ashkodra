@@ -1,7 +1,9 @@
 package org.example;
 import java.io.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import com.google.gson.*;
+
 
 public class JSONSpeichern implements Speichern{
     @Override
@@ -22,7 +24,7 @@ public class JSONSpeichern implements Speichern{
             return gson.fromJson(reader, Trainer.class);
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return new Trainer(new ArrayList<Wortpaar>());
         }
     }
 

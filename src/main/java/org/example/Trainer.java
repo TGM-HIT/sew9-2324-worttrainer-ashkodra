@@ -6,6 +6,7 @@ public class Trainer {
     private Wortpaar currentWort;
     private int insgesamt = 0;
     private int richtig = 0;
+    private int lastTry = 1;
 
     public Trainer(ArrayList<Wortpaar> woerter){
         this.woerter = woerter;

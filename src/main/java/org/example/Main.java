@@ -14,7 +14,7 @@ public class Main {
         list1.add(new Wortpaar("Löwe", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQldi33KDlqHkY1r7lpj2sRZvOezcecu8VbNQ&usqp=CAU"));
 
         Trainer rt1 = new Trainer(list1);
-        rt1.wortAuswaehlen(1);
+        rt1.wortAuswaehlen();
 
         //Ansicht ansicht = new Ansicht();
         Speichern speichern = new JSONSpeichern();

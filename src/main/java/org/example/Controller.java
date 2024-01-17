@@ -10,19 +10,18 @@ public class Controller implements ActionListener{
         speichern = new JSONSpeichern();
         trainer = speichern.laden("speicherung.json");
         ansicht = new Ansicht(this);
-        updateView();
+        updateAnsicht();
 
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Überprüfen")) {
-            Trainer.pruefen(ansicht.getEingabe());
+            trainer.pruefen(ansicht.getEingabe());
             ansicht.resetEingabe();
-            updateView();
+            updateAnsicht();
         }
     }
-
-    public void updateView() {
+    public void updateAnsicht() {
         ansicht.setStatistik(trainer.getStatistikInsgesamt(), trainer.getStatistikRichtig(), trainer.getStatistikFalsch());
         ansicht.setBild(trainer.getCurrentWort().getURL());
     }
