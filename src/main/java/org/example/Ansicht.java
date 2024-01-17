@@ -4,6 +4,9 @@ import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.awt.event.ActionListener;
+/**
+Die Ansicht des Trainers
+ */
 public class Ansicht extends JFrame {
     private JLabel imageLabel;
     private JTextField eingabe;
@@ -23,6 +26,9 @@ public class Ansicht extends JFrame {
 
         //MittelPanel (beinhaltet Bild, Letzten Versuch und Statistik)
         JPanel midPanel = new JPanel(new BorderLayout());
+
+        //ButtonPanel
+        JPanel buttonPanel = new JPanel(new BorderLayout());
 
         //Bild
         ImageIcon bild;
@@ -44,7 +50,13 @@ public class Ansicht extends JFrame {
         JButton submit = new JButton("Abschicken");
         submit.setActionCommand("Überprüfen");
         submit.addActionListener(ac);
-        panel.add(submit, BorderLayout.SOUTH);
+        buttonPanel.add(submit, BorderLayout.CENTER);
+
+        //Beenden Button
+        JButton exit = new JButton("Exit");
+        exit.setActionCommand("exit");
+        exit.addActionListener(ac);
+        buttonPanel.add(exit, BorderLayout.SOUTH);
 
         //letzer Versuch
         letzterVersuch = new JLabel("Letzter Versuch: ");
@@ -55,19 +67,31 @@ public class Ansicht extends JFrame {
         midPanel.add(statistik, BorderLayout.EAST);
 
         panel.add(midPanel,BorderLayout.NORTH);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
         this.add(panel);
         this.setVisible(true);
 
     }
-
+    /**
+     setzt ein neues Bild
+     @param url URL des neuen Bildes
+     */
     public void setBild(String url){
 
         try {
-            imageLabel.setIcon(new ImageIcon(new URL(url)));
+            ImageIcon ic = new ImageIcon(new URL(url));
+            Image image = ic.getImage ().getScaledInstance (1200, 750, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(image));
+
+
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
     }
+    /**
+     setzt den letzten try auf eine von 4 Möglichkeiten
+     @param status neuer Status des letzten Versuches
+     */
     public void setLV(int status){
 
         switch (status){
@@ -80,6 +104,12 @@ public class Ansicht extends JFrame {
             default: letzterVersuch.setText("");
         }
     }
+    /**
+     setzt eine neue Statistik
+     @param gesamt Anzahl aller Wörter
+     @param richtig Anzahl aller richtigen Wörter
+     @param falsch Anzahl aller falschen Wörter
+     */
     public void setStatistik(int gesamt, int richtig, int falsch){
 
         statistik.setText("<html>Gesamt: "+gesamt+"<br/>Richtig: "+richtig+"<br/>Falsch: "+falsch+"</html>");
@@ -88,7 +118,9 @@ public class Ansicht extends JFrame {
     public String getEingabe(){
         return eingabe.getText();
     }
-
+    /**
+     setzt das Eingabefeld wieder auf leer
+     */
     public void resetEingabe() {
         eingabe.setText("");
     }
