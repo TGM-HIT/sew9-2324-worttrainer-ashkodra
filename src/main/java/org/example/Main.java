@@ -16,6 +16,7 @@ public class Main {
         Trainer rt1 = new Trainer(list1);
         rt1.wortAuswaehlen();
 
+        //Hier werden die Daten in ein .json-File gespeichert
         //Ansicht ansicht = new Ansicht();
         Speichern speichern = new JSONSpeichern();
         speichern.speichern("speicherung.json", rt1);

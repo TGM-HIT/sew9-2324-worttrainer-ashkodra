@@ -35,6 +35,10 @@ public class JSONSpeichern implements Speichern{
             return loadStandard();
         }
     }
+    /**
+     * Diese Methode lädt ein Standard Trainer-Objekt mit Beispiel Wörtern.
+     * @return Das geladene Trainer-Objekt.
+     */
     public Trainer loadStandard(){
         ArrayList<Wortpaar> list1 = new ArrayList<>();
         list1.add(new Wortpaar("Hund", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzgEm_MjA9eqoV809zbQlj55J7EAbgkKa88w&usqp=CAU"));
